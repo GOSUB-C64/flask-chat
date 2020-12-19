@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat page for {{ username }}</title>
 </head>
+
 <body>
     <h1>Welcome, {{ username }}</h1>
-    {{ chat_messages }}
+
+    <form method="POST">
+
+        <textarea cols="50" rows="4" name="message" id="message"></textarea>
+        <br>
+        <button id="send">Send Message</button>
+    </form>
+
+    {% for message in chat_messages %}
+    <p>({{ message.timestamp }}) {{ message.from }}: {{ message.message}}</p>
+    {% endfor%}
+
+    <script>
+        let sendbutton = document.getElementById("send")
+
+        let timer = setTimeout(function () {
+            location.reload();
+        }, 15000);
+
+        sendbutton.onclick = function (e) {
+            clearTimeout(timer)
+
+            let timer = setTimeout(function () {
+                location.reload();
+            }, 15000);
+        }
+    </script>
 </body>
+
 </html>
